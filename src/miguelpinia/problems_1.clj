@@ -41,3 +41,22 @@
     (println (str minimum " " maximum))))
 
 (miniMaxSum arr)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; https://www.hackerrank.com/challenges/time-conversion/problem ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn timeConversion [s]
+  (let [time_s (s/split s #":")
+        hour   (Integer/parseInt (first time_s))
+        mins   (second time_s)
+        secs   (clojure.string/join (take 2 (nth time_s 2)))
+        am?    (= "AM" (clojure.string/join (take-last 2 (last time_s))))
+        pm?    (not am?)
+        hour_s (cond
+                 (and am? (= hour 12)) "00"
+                 (and pm? (< hour 12)) (str (+ 12 hour))
+                 :else               (format "%02d" hour))]
+    (clojure.string/join ":" [hour_s mins secs])))
+
+(timeConversion "07:05:45PM")
