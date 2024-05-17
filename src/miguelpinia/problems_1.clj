@@ -23,3 +23,21 @@
                      (f zeros)))))
 
 #_(plusMinus arr)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; hackerrank.com/challenges/one-month-preparation-kit-mini-max-sum/problem ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; If we are calculating the minimum-sum, we can solve this problem in linear time. just we need to find the maximum and make the rest from the sum of all elements
+;; Similar case for the maximum-sum and find the minimum value in the array
+
+(def arr [1 3 5 7 9])
+
+(defn miniMaxSum [arr]
+  (let [arr-sum (reduce + arr)
+        maximum (- arr-sum (apply min arr))
+        minimum (- arr-sum (apply max arr))]
+    (println (str minimum " " maximum))))
+
+(miniMaxSum arr)
