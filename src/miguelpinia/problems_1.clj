@@ -84,3 +84,30 @@
              (rest rest-q)))))
 
 (matchingStrings strings queries)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; hackerrank.com/challenges/one-month-preparation-kit-lonely-integer/problem ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+(def a [1 2 3 4 3 2 1])
+(def b [1 1 2])
+(def c [0 0 1 2 1])
+
+(defn lonelyInteger [a]
+  (->> (loop [values {}
+              a      a]
+         (if (empty? a)
+           values
+           (recur
+            (update values (first a) (fnil inc 0))
+
+            (rest a))))
+       (filter #(= (second %) 1))
+       first
+       first))
+
+(defn lonelyInteger2 [a]
+  (reduce (fn [val acc] (bit-xor acc val)) a))
+
+(lonelyInteger2 c)
