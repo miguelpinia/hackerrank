@@ -60,3 +60,27 @@
     (clojure.string/join ":" [hour_s mins secs])))
 
 (timeConversion "07:05:45PM")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; hackerrank.com/challenges/one-month-preparation-kit-sparse-arrays/problem ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+(def strings ["ab" "ab" "abc"])
+
+(def queries ["ab" "abc" "bc"])
+
+(def results [2 1 0])
+
+(defn matchingStrings [strings queries]
+  (loop [results []
+         query   (first queries)
+         rest-q  (rest queries)]
+    (if (nil? query)
+      results
+      (recur (conj results
+                   (->> strings (filter #(= % query)) count))
+             (first rest-q)
+             (rest rest-q)))))
+
+(matchingStrings strings queries)
