@@ -119,3 +119,22 @@
 (def n 2147483647)
 (defn flipingBits [n] (bit-xor n (- (long (Math/pow 2 32)) 1)))
 (flipingBits 1)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; hackerrank.com/challenges/one-month-preparation-kit-diagonal-difference/problem ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn diagonalDifference [arr]
+  (let [size     (count arr)
+        both     (loop [a []
+                        b []
+                        i 0]
+                   (if (> i (- size 1))
+                     [a b]
+                     (recur (conj a (get-in arr [i i]))
+                            (conj b (get-in arr [i (- size (+ i 1))]))
+                            (inc i))))
+        sum-both (map #(apply + %) both)
+        result   (apply - sum-both)]
+    (Math/abs result)))
+
