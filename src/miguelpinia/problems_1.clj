@@ -111,3 +111,11 @@
   (reduce (fn [val acc] (bit-xor acc val)) a))
 
 (lonelyInteger2 c)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; hackerrank.com/challenges/one-month-preparation-kit-flipping-bits/problem ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(def n 2147483647)
+(defn flipingBits [n] (bit-xor n (- (long (Math/pow 2 32)) 1)))
+(flipingBits 1)
