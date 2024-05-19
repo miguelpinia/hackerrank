@@ -1,5 +1,5 @@
 (ns miguelpinia.problems-1
-  (:require [clojure.string :as s]))
+  (:require [clojure.string :as str]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; https://www.hackerrank.com/challenges/one-month-preparation-kit-plus-minus/problem ;;
@@ -166,3 +166,24 @@
 #_(frequencies arr)
 
 #_(= result (vec (countingSort arr)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; hackerrank.com/challenges/one-month-preparation-kit-pangrams/problem?isFullScreen ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(def success "We promptly judged antique ivory buckles for the next prize")
+(def unsuccess "We promptly judged antique ivory buckles for the prize ")
+
+(defn pangrams [s]
+  (-> s
+      str/lower-case
+      (str/replace #" " "")
+      seq
+      set
+      count
+      (= 26)
+      (if "pangram" "not pangram")))
+
+#_(pangrams success)
+#_(pangrams unsuccess)
