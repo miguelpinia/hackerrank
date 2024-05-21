@@ -201,3 +201,46 @@
   "NO"))
 
 (= (twoArrays 5 A B) "YES")
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; hackerrank.com/challenges/one-month-preparation-kit-the-birthday-bar/problem ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; The next implementation does not rely on additional space, just the references used during the tail recursion. Complexity time: O(n), complexity space: O(1).
+
+(defn birthday [s d m]
+  (let [size (count s)]
+    (loop [i      0
+           min    (first s)
+           acc    0
+           result 0]
+      (if (>= i size)
+        result
+        (if (< i m)
+          (let [curr (+ acc (nth s i))]
+            (recur (inc i)
+                   min
+                   curr
+                   (if (and (= curr d) (= (inc i) m)) (inc result) result)))
+          (let [curr (- (+ acc (nth s i)) min)]
+            (recur (inc i)
+                   (nth s (inc (- i m)))
+                   curr
+                   (if (= curr d) (inc result) result))))))))
+
+
+;; The next implementation is easier than the previous, but it depends on additional space to operate; in each iteration, we use an additional vector of size m representing a window, which is reduced with the sum function to know if the sum is equal to d. Complexity time O(* (- size m) m), complexity space O(* (- size m) m).
+
+(defn birthday-2 [s d m]
+  (let [result (atom 0)
+        size   (count s)]
+    (doseq [i (range (inc (- size m)))]
+      (let [sl (subvec s i (+ i m))
+            rs (reduce + sl)]
+        (when (= rs d) (swap! result inc))))
+    (deref result)))
+
+
+(birthday [2 2 1 3 2] 4 2)
