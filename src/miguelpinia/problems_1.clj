@@ -244,3 +244,44 @@
 
 
 (birthday [2 2 1 3 2] 4 2)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; hackerrank.com/challenges/one-month-preparation-kit-sock-merchant/problem ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+(def n 9)
+(def arr [10 20 20 10 10 30 50 10 20])
+
+;; Using frequencies and iterating over the elements in the map
+
+(defn sockMerchant [n ar]
+  (loop [vals   (frequencies ar)
+         result 0]
+    (if (empty? vals)
+      result
+      (let [[x v] (first vals)
+            pairs (Math/floorDiv v 2)]
+        (recur (rest vals)
+               (+ result pairs))))))
+
+;; Instead of use a map with frequencies, we use a set to verify if an element already was visited.
+
+(defn sockMerchant2 [n arr]
+  (loop [arr    arr
+         result 0
+         s      #{}]
+    (if (empty? arr)
+      result
+      (let [val (first arr)]
+        (if (s val)
+          (recur (rest arr)
+                 (inc result)
+                 (disj s val))
+          (recur (rest arr)
+                 result
+                 (conj s val)))))))
+
+
+(sockMerchant n arr)
+(sockMerchant2 n arr)
