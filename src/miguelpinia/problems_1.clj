@@ -320,3 +320,27 @@
 
 (defn towerBreakers [n m]
   (if (or (= m 1) (= (mod n 2) 0)) 2 1))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; hackerrank.com/challenges/one-month-preparation-kit-caesar-cipher-1/problem ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn caesarCipher [s k]
+  (let [k              (mod k 26)
+        lower-alphabet "abcdefghijklmnopqrstuvwxyz"
+        upper-alphabet "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        rotate-fn      (fn [s k] (str (str/join (drop k s)) (str/join (take k s))))
+        lower-rotated  (rotate-fn lower-alphabet k)
+        upper-rotated  (rotate-fn upper-alphabet k)
+        output         (StringBuilder.)]
+    (doseq [e s]
+      (if (Character/isLetter e)
+        (let [is-lower? (Character/isLowerCase e)
+              idx       (str/index-of (if is-lower? lower-alphabet upper-alphabet) e)
+              new-char  (nth (if is-lower? lower-rotated upper-rotated) idx)]
+          (.append output new-char))
+        (.append output e)))
+    (str output)))
+
+
+(= (caesarCipher "Always-Look-on-the-Bright-Side-of-Life" 5) "Fqbfdx-Qttp-ts-ymj-Gwnlmy-Xnij-tk-Qnkj")
