@@ -285,3 +285,20 @@
 
 (sockMerchant n arr)
 (sockMerchant2 n arr)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; hackerrank.com/challenges/one-month-preparation-kit-drawing-book/problem ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; n pages long, student wants turn to page p
+;; if n is odd, is like if the last page were at the backcover
+;; else if n is even, if the page is turned over to the back is counted by one
+;; We want to determine the minimum number of pages we need to turn over to arrive on page p, either from the cover or the back cover.
+
+(defn pageCount [n p]
+  (let [n1 (if (even? n) (inc n) n)]
+    (min
+     (int (/ p 2))
+     (int (/ (- n1 p) 2)))))
+
+(pageCount 5 1)
