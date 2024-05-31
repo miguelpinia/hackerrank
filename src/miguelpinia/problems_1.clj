@@ -344,3 +344,31 @@
 
 
 (= (caesarCipher "Always-Look-on-the-Bright-Side-of-Life" 5) "Fqbfdx-Qttp-ts-ymj-Gwnlmy-Xnij-tk-Qnkj")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; hackerrank.com/challenges/one-month-preparation-kit-angry-children/problem ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn maxMin [k arr]
+  (let [sorted (sort > arr)
+        size   (count arr)]
+    (loop [i   0
+           val Integer/MAX_VALUE]
+      (if (> i (- size k))
+        val
+        (recur (inc i)
+               (min val (- (nth sorted i) (nth sorted (dec (+ i k))))))))))
+
+(defn maxMin [k arr]
+  (let [sorted-array (sort arr)
+        size         (count arr)]
+    (loop [i   0
+           val Integer/MAX_VALUE]
+      (if (> i (- size k))
+        val
+        (recur (inc i)
+               (min val (- (nth sorted-array (+ i (dec k))) (nth sorted-array i))))))))
+
+(let [arr [1 2 3 4 10 20 30 40 100 200]
+      k 4]
+  (maxMin k arr))
