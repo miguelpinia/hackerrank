@@ -60,17 +60,9 @@ public class LowestCommonAncestor {
                 nodes.offer(new NodePath(n.current.right, newPath));
             }
         }
-
         return new ArrayList<>();
-
     }
 
-    /*
-    class Node
-    	int data;
-    	Node left;
-    	Node right;
-     */
     public static Node lca(Node root, int v1, int v2) {
         // Write your code here.
         List<Node> toV1 = buildPath(root, v1);
