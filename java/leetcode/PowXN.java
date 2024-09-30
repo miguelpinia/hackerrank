@@ -56,7 +56,10 @@ public class PowXN {
     /**
      * 0ms, beats 100%, 41.92mb, beats 68.44%.
      *
-     * n even: x ** n = (x ** (n//2)) ** 2; n odd: x ** n = x * (x ** (n //2))
+     * n even: x ** n = (x ** (n//2)) ** 2;
+
+
+     n odd: x ** n = x * (x ** (n //2))
      * ** 2¨*
      *
      * @param x
